@@ -135,8 +135,6 @@ public class BioDedupeProcessor {
 	/** The reg proc logger. */
 	private static Logger regProcLogger = RegProcessorLogger.getLogger(BioDedupeProcessor.class);
 
-
-
 	@Value("${registration.processor.infant.dedupe}")
 	private String infantDedupe;
 
@@ -638,6 +636,7 @@ public class BioDedupeProcessor {
 		List<String> mapperJsonKeys = new ArrayList<>(mapperIdentity.keySet());
 
 		for (String key : mapperJsonKeys) {
+			if(BioDedupeConstants.SELECTED_HANDLES.equalsIgnoreCase(key)) continue;
 			JSONObject jsonValue = JsonUtil.getJSONObject(mapperIdentity, key);
 			Object jsonObject = JsonUtil.getJSONValue(demographicJsonIdentity,
 					(String) jsonValue.get(BioDedupeConstants.VALUE));
